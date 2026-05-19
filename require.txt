@@ -1,0 +1,43 @@
+# ─────────────────────────────────────────
+#  REQUIREMENTS — Sistema Web Python
+#  Instalar com: pip install -r require.txt
+# ─────────────────────────────────────────
+
+# ── Backend principal ──
+fastapi==0.115.5
+uvicorn[standard]==0.32.1
+
+# ── Validação de dados ──
+pydantic[email]==2.10.3
+
+# ── Autenticação e criptografia ──
+python-jose[cryptography]==3.3.0
+passlib[bcrypt]==1.7.4
+python-multipart==0.0.18
+
+# ── Banco de dados ──
+sqlalchemy==2.0.36
+alembic==1.14.0
+psycopg2-binary==2.9.10
+
+# ── Cache e sessões (Redis) ──
+redis==5.2.1
+
+# ── HTTP client (para integrar APIs externas) ──
+httpx==0.28.0
+
+# ── Gemini — Chatbot IA ──
+openai
+
+# ── Templates (frontend server-side) ──
+jinja2==3.1.4
+
+# ── Variáveis de ambiente ──
+python-dotenv==1.0.1
+
+# ── Testes ──
+pytest==8.3.4
+pytest-asyncio==0.24.0
+
+# ── Utilitários ──
+email-validator==2.2.0
