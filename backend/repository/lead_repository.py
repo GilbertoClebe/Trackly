@@ -1,8 +1,8 @@
 from sqlalchemy.orm import Session
 from sqlalchemy import select
-from models.lead_user import Lead
+from backend.models.lead_model import Lead
 
-class LeadService :
+class LeadRepository :
     def __init__(self, db: Session) :
         self.db = db
         
