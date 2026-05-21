@@ -11,6 +11,6 @@ class Goal(Base) :
     title: Mapped[str] = mapped_column(String(150))
     description: Mapped[str] = mapped_column(Text)
     status: Mapped[str] = mapped_column()
-    date_creation: Mapped[date] = mapped_column(date.today)
-    date_conclusion: Mapped[date] = mapped_column()
+    date_creation: Mapped[date] = mapped_column(default=date.today)
+    date_conclusion: Mapped[date] = mapped_column(nullable=True)
     
