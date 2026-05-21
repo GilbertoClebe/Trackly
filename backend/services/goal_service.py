@@ -6,7 +6,7 @@ class GoalService :
         self.repo = repo
         
     def create_goal(self, schema: GoalCreate) -> Goal :
-        goal = self.create_to_goal(schema)
+        goal = self.parse_create_to_goal(schema)
         return self.repo.create_goal(goal)
     
     def get_goal(self, id: int) -> Goal :
@@ -22,7 +22,7 @@ class GoalService :
     def delete_goal(self, id: int) -> None :
         return self.repo.delete_goal(id)
         
-    def create_to_goal(self, schema: GoalCreate) -> Goal :
+    def parse_create_to_goal(self, schema: GoalCreate) -> Goal :
         return Goal(
             status = schema.status.value,
             title = schema.title,
