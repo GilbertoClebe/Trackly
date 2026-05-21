@@ -10,8 +10,8 @@ class Role(Enum) :
 class UserBase(BaseModel) :
     name: str
     email: str
-    number: str = Field(max_length=11, min_length=11)
-    CPF: str = Field(max_length=11, min_length=11)
+    number: str = Field(max_length=11)
+    CPF: str = Field(max_length=11)
     address: str
     role: Role
     
@@ -25,8 +25,8 @@ class UserResponse(UserBase) :
 class UserUpdate(BaseModel) :
     name: Optional[str] = None
     email: Optional[str] = None
-    number: Optional[str] = Field(max_length=11, min_length=11) | None
-    CPF: Optional[str] = Field(max_length=11, min_length=11) | None
+    number: Optional[str] = Field(max_length=11, min_length=11) or None
+    CPF: Optional[str] = Field(max_length=11, min_length=11) or None
     address: Optional[str] = None
     role: Optional[Role] = None
     date_creation: Optional[date] = None
