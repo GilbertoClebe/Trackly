@@ -3,7 +3,7 @@ from schemas.lead_schema import LeadReceive, LeadResponse, LeadUpdate
 from services.lead_service import LeadService
 from dependencies import get_lead_service
 from models.lead_model import Lead
-router = APIRouter()
+router = APIRouter(tags=(["Lead"]))
 
 @router.post("/leads", response_model=bool)
 def receive_router(schema: LeadReceive, service: LeadService = Depends(get_lead_service)) -> bool :
