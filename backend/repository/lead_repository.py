@@ -1,6 +1,6 @@
 from sqlalchemy.orm import Session
-from sqlalchemy import select
-from backend.models.lead_model import Lead
+from sqlalchemy import update
+from models.lead_model import Lead
 
 class LeadRepository :
     def __init__(self, db: Session) :
@@ -14,17 +14,11 @@ class LeadRepository :
     def get_lead(self, id: int) -> Lead :
         return self.db.get(Lead, id)
     
-    def list_leads(self) -> list[Lead] :
-        return self.db.scalars(select(Lead))
-    
-    def update_lead(self, lead: Lead) :
-        updated_lead = self.db.merge(lead)
+    def update_lead(self, id: int, status_novo: str) -> Lead:
+        lead = self.db.get(Lead, id)
+        lead.status = status_novo
+        self.db.execute(update(Lead).where(Lead.id == id).values(status = status_novo))
+        
         self.db.commit()
-        self.db.refresh(updated_lead)
-        return updated_lead
-    
-    def deactivate_lead(self, lead: Lead) -> Lead :
-        deactivated_lead = self.db.merge(lead)
-        self.db.commit()
-        self.db.refresh(deactivated_lead)
-        return deactivated_lead
+        self.db.refresh(lead)
+        return lead

@@ -11,11 +11,9 @@ class LeadService :
     def get_lead(self, id: int) -> Lead :
         return self.repo.get_lead(id)
     
-    def list_leads(self) -> list[Lead] :
-        return self.repo.list_leads()
-    
-    def update_leads(self, schema: LeadUpdate) -> Lead :
-        return self.repo.update_lead(self.update_to_lead(schema))
+    def update_leads(self, id: int, schema: LeadUpdate) -> Lead :
+        status_novo = self.update_to_lead(schema)
+        return self.repo.update_lead(id, status_novo)
     
     def receive_to_lead(self, schema: LeadReceive) : 
         return Lead(
@@ -26,14 +24,11 @@ class LeadService :
             address = schema.address,
             birthdate = schema.birthdate,
             occupation = schema.occupation,
-            status = schema.status
+            date_update = None,
+            status = schema.status.value
         )
         
     def update_to_lead(self, schema: LeadUpdate) -> Lead :
         return Lead(
-            status = schema.status
+            status = schema.status.value
         )
-
-    def deactivate_lead(self, id: int) -> Lead :
-        lead = self.get_lead(id)
-        return self.deactivate_lead(lead)

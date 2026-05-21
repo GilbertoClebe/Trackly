@@ -10,13 +10,13 @@ class Lead(Base) :
     
     name: Mapped[str] = mapped_column(String(120))
     last_name: Mapped[str] = mapped_column(String(120))
-    number: Mapped[str] = mapped_column(String(11))
+    number: Mapped[str] = mapped_column()
     email: Mapped[str] = mapped_column(Text)
     address: Mapped[str] = mapped_column()
     birthdate: Mapped[date] = mapped_column()
     occupation: Mapped[str] = mapped_column()
     status: Mapped[str] = mapped_column()
-    date_access: Mapped[date] = mapped_column(date.today)
-    date_update: Mapped[date] = mapped_column()
+    date_access: Mapped[date] = mapped_column(default=date.today)
+    date_update: Mapped[date] = mapped_column(nullable=True)
     
     
