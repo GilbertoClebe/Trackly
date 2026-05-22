@@ -13,7 +13,7 @@ class GoalService :
         return self.repo.get_goal(id)
     
     def list_goals(self) -> list[Goal] :
-        return self.repo.list_goal()
+        return self.repo.list_goals()
     
     def update_goal(self, id: int, schema: GoalUpdate) -> Goal :
         goal = self.update_to_goal(schema)
@@ -31,7 +31,7 @@ class GoalService :
         
     def update_to_goal(self, schema: GoalUpdate) -> Goal :
         return Goal(
-            status = schema.status.value,
+            status = schema.status.value if schema.status else None,
             title = schema.title,
             description = schema.description
         )

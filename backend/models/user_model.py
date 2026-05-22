@@ -15,4 +15,5 @@ class User(Base) :
     number: Mapped[str] = mapped_column(String(11))
     role: Mapped[str] = mapped_column()
     date_creation: Mapped[date] = mapped_column(default=date.today)
+    hash: Mapped[str] = mapped_column(Text)
     active: Mapped[bool] = mapped_column(default=True)

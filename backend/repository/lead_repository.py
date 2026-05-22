@@ -1,3 +1,4 @@
+from fastapi.exceptions import HTTPException
 from sqlalchemy.orm import Session
 from sqlalchemy import update
 from models.lead_model import Lead
@@ -12,13 +13,14 @@ class LeadRepository :
         return True
 
     def get_lead(self, id: int) -> Lead :
-        return self.db.get(Lead, id)
+        lead = self.db.get(Lead, id)
+
+        return lead
     
     def update_lead(self, id: int, status_novo: str) -> Lead:
         lead = self.db.get(Lead, id)
-        lead.status = status_novo
-        self.db.execute(update(Lead).where(Lead.id == id).values(status = status_novo))
-        
+
+        lead.status = status_novo        
         self.db.commit()
         self.db.refresh(lead)
         return lead

@@ -10,5 +10,5 @@ class Chat(Base) :
     
     prompt: Mapped[str] = mapped_column(String(500))
     message: Mapped[str] = mapped_column(Text)
-    date_requisition: Mapped[date] = mapped_column(date.today)
+    date_requisition: Mapped[date] = mapped_column(default=date.today)
     

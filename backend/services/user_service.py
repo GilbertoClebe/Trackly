@@ -8,6 +8,7 @@ class UserService :
         
     def create_user(self, schema: UserCreate) -> bool :
         user = self.parse_create_to_user(schema)
+        user.hash = self.hashing(user.hash)
         return self.repo.create_user(user)
     
     def get_user(self, id: int) -> User :
@@ -39,17 +40,18 @@ class UserService :
             number = schema.number,
             CPF = schema.CPF,
             address = schema.address,
-            role = schema.role.value
+            role = schema.role.value,
+            hash = schema.password
         )
         
     def parse_update_to_user(self, schema: UserUpdate) -> User :
         return User(
             name = schema.name,
             email = schema.email,
-            number = schema.email,
+            number = schema.number,
             CPF = schema.CPF,
             address = schema.address,
-            role = schema.role.value,
+            role = schema.role.value if schema.role else None,
             date_creation = schema.date_creation,
             active = schema.active
         )

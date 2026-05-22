@@ -1,3 +1,4 @@
+from fastapi.exceptions import HTTPException
 from sqlalchemy.orm import Session
 from sqlalchemy import delete, select, update
 from models.goal_model import Goal
@@ -14,13 +15,16 @@ class GoalRepository :
         return goal
     
     def get_goal(self, id: int) -> Goal :
-        return self.db.get(Goal, id)
+        goal = self.db.get(Goal, id)
+
+        return goal
     
-    def list_goal(self) -> list[Goal] :
-        return list[self.db.scalars(select(Goal)).all()]
+    def list_goals(self) -> list[Goal] :
+        return self.db.scalars(select(Goal)).all()
     
     def update_goal(self, id: int, new_goal: Goal) -> Goal :
         goal = self.db.get(Goal, id)
+
         
         goal.title = new_goal.title
         goal.description = new_goal.description
