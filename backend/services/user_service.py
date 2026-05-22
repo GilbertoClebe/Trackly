@@ -1,6 +1,7 @@
 from repository.user_repository import UserRepository
-from schemas.user_schema import UserCreate, UserResponse, UserUpdate
+from schemas.user_schema import UserCreate, UserUpdate
 from models.user_model import User
+from passlib.hash import sha256_crypt
 class UserService :
     def __init__(self, repo: UserRepository) :
         self.repo = repo
@@ -53,4 +54,8 @@ class UserService :
             active = schema.active
         )
         
+    def hashing(self, password: str) -> str :
+        return sha256_crypt.using(rounds=8000).hash(password)
     
+    def verify_password(self, password: str, hash: str) -> bool :
+        return sha256_crypt.verify(password, hash)
